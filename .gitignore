@@ -19,7 +19,3 @@ rdoc
 pkg
 
 ## PROJECT::SPECIFIC
-
-docs
-docs/*
-docs/**/*
