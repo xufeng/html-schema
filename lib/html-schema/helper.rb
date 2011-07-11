@@ -1,15 +1,10 @@
 class HTMLSchema
   module Helper
-    def htmlschema
-      @htmlschema ||= HTMLSchema.instance
-    end
-    
-    def microformat
-      htmlschema.microformat
-    end
-    
-    def microdata
-      htmlschema.microdata
+    def htmlschema(*args)
+      options                = args.extract_options!
+      object                 = HTMLSchema.instance
+      args.each { |i| object = object.send(i) }
+      object.to_hash.merge(options)
     end
   end
 end
