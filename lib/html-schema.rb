@@ -3,13 +3,6 @@ require 'active_support/core_ext'
 $:.unshift File.dirname(File.expand_path(__FILE__)) + "/html-schema"
 
 class HTMLSchema
-  autoload :API,            "api"
-  autoload :Attribute,      "attribute"
-  autoload :Base,           "base"
-  autoload :Microdata,      "microdata"
-  autoload :Microformat,    "microformat"
-  autoload :Configuration,  "configuration"
-  
   class << self
     def root
       @root ||= File.dirname(File.expand_path(__FILE__))
@@ -47,19 +40,19 @@ class HTMLSchema
   
   def initialize(types = {})
     self.class.instance = self
-    api.keys.each { |key| define_api_method(key) }
+    api.types.keys.each { |key| define_api_method(key) }
   end
   
   def api
-    @api          ||= HTMLSchema::API.types
+    @api          ||= HTMLSchema::API
   end
   
   def microdata
-    @microdata    ||= HTMLSchema::Microdata.types
+    @microdata    ||= HTMLSchema::Microdata
   end
   
-  def microformats
-    @microformats ||= HTMLSchema::Microformat.types
+  def microformat
+    @microformat  ||= HTMLSchema::Microformat
   end
   
   # todo, iterate through tree, so you can visualize it however you want.
@@ -74,3 +67,17 @@ class HTMLSchema
     end unless self.respond_to?(name)
   end
 end
+
+require 'object'
+require 'attribute'
+require 'configuration'
+require 'dsl'
+require 'api/object'
+require 'api/attribute'
+require 'microdata/object'
+require 'microdata/attribute'
+require 'microformat/object'
+require 'microformat/attribute'
+require 'api'
+require 'microdata'
+require 'microformat'

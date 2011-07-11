@@ -1,8 +1,8 @@
 class HTMLSchema
-  module Microformat
+  class Microformat
     class Object < HTMLSchema::Object
       def to_hash
-        {:class => types.map(&:to_s).join(" ")}
+        {:class => classes.join(" ")}
       end
     end
   end

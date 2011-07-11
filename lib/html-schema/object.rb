@@ -1,93 +1,38 @@
 class HTMLSchema
   class Object
-    attr_accessor :parent, :source, :as, :types, :attributes
+    attr_accessor :parent, :source, :as, :types, :attributes, :_name
+    attr_accessor :classes
     
-    attribute :id
-    attribute :title
-    attribute :url
-    attribute :description
-    attribute :image
-
-    class << self
-      def types
-        @types ||= HTMLSchema.bootstrap!(:microdata)
-      end
+    def initialize(name, options = {}, &block)
+      @_name      = name
+      @attributes = {}
+      @types      = {}
+      @parent     = options[:parent]
+      @as         = options[:as] || name
+      @classes    = Array(as).map(&:to_s)
       
-      def [](key)
-        types[key]
-      end
+      # inherit parent attributes
+      @parent.attributes.each do |key, attribute|
+        self.attribute key, attribute.value
+      end if @parent
+      
+      instance_eval(&block) if block_given?
     end
     
-    def initialize(attributes = {})
-      # initialize attributes
-      self.types = self.class.types.keys
-      self.types = [self.class.name.underscore.split("/").last.to_sym] if self.types.blank?
-      
-      self.class.all_attributes.each do |name, options|
-        self.attributes[name] = create_attribute(name, options)
-      end
-      
-      self.source ||= types.first
-      
-      attributes.each do |key, value|
-        if self.respond_to?("#{key}=")
-          self.send("#{key}=", value)
-        else
-          self.send(key).value = value
-        end
-      end
+    def attribute(name, options = {})
+      create_attribute name, options
     end
     
-    # simplify
+    def type(name, options = {}, &block)
+      create_type name, options, &block
+    end
+    
+    def inspect
+      "#<#{self.class.name} name: #{_name.inspect}, attributes: #{attributes.inspect} parent: #{(parent.present? ? parent._name : nil).inspect}, types: #{types.keys.inspect}>"
+    end
+    
     def [](key)
-      key == :type ? self.to_hash : send(key).to_hash
-    end
-    alias_method :attribute, :[]
-    
-    def value(key)
-      send(key).value
-    end
-    
-    def to_hash
-      {}
-    end
-    
-    def key
-      @key ||= self.class.name.underscore.split("/").last.to_sym
-    end
-    
-    def attributes
-      @attributes ||= {}
-    end
-    
-    class << self
-      def attribute(name, options = {})
-        attributes[name] = options
-      end
-      
-      def attributes
-        @attributes ||= {}
-      end
-      
-      def all_attributes
-        result = {}
-        (self.ancestors - self.included_modules).reverse.each do |klass|
-          result.merge! klass.attributes if klass.respond_to?(:attributes)
-        end
-        result
-      end
-      
-      def attribute?
-        false
-      end
-      
-      def type(name, options = {})
-        types[name] = options
-      end
-      
-      def types
-        @types ||= {}
-      end
+      attributes[key]
     end
     
     protected
@@ -95,25 +40,23 @@ class HTMLSchema
       @format_class ||= "#{self.class.name.split("::")[0..-2].join("::")}".constantize
     end
     
+    def attribute_class
+      @attribute_class ||= "#{format_class.name}::Attribute".constantize
+    end
+    
     def create_attribute(name, options = {})
-      type = case options[:type]
-      when :date, :boolean, :integer, :number, :text, :string, nil
-        :attribute
-      else
-        options[:type]
-      end
+      attributes[name] = attribute_class.new(name, options.merge(:parent => _name))
       
-      if type == :attribute
-        self.class.send :define_method, name do
-          self.attributes[name]
-        end unless self.respond_to?(name)
-        "::#{format_class.name}::#{type.to_s.camelize}".constantize.new(options.merge(:name => name, :parent => key))
-      else
-        self.class.send :define_method, name do
-          self.attributes[name] ||= format_class[name]
-        end unless self.respond_to?(name)
-        nil
-      end
+      self.class.send :define_method, name do
+        self.attributes[name]
+      end unless self.respond_to?(name)
+    end
+    
+    def create_type(name, options = {}, &block)
+      types[name] = format_class[name] = self.class.new(name, options.reverse_merge(:parent => self), &block)
+      self.class.send :define_method, name do
+        self.types[name]
+      end unless self.respond_to?(name)
     end
   end
 end

@@ -1,8 +1,8 @@
 class HTMLSchema
-  module Microdata
+  class Microdata
     class Attribute < HTMLSchema::Attribute
       def to_hash
-        {:itemprop => (as || name).to_s}
+        {:itemprop => classes.join(" ")}
       end
     end
   end

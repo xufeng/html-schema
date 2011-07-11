@@ -1,12 +1,12 @@
 class HTMLSchema
-  module API
+  class API
     class Attribute < HTMLSchema::Attribute
       def microdata
-        @microdata ||= HTMLSchema::Microdata.types[parent][name]
+        @microdata ||= HTMLSchema.instance.microdata[parent][_name]
       end
       
       def microformat
-        @microformat ||= HTMLSchema::Microformat.types[parent][name]
+        @microformat ||= HTMLSchema.instance.microformat[parent][_name]
       end
       
       def to_microdata

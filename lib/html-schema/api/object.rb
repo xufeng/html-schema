@@ -3,11 +3,11 @@ class HTMLSchema
   class API
     class Object < HTMLSchema::Object
       def microdata
-        @microdata ||= "::HTMLSchema::Microdata::#{self.class.name.split("::").last}".constantize.new
+        @microdata ||= HTMLSchema.instance.microdata[_name]
       end
       
       def microformat
-        @microformat ||= "::HTMLSchema::Microformat::#{self.class.name.split("::").last}".constantize.new
+        @microformat ||= HTMLSchema.instance.microformat[_name]
       end
       
       def to_microdata

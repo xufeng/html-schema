@@ -13,12 +13,12 @@ describe HTMLSchema do
       
       it "should have attributes" do
         @organization.to_hash.should              == {
-          :itemprop  => "organization", 
           :itemscope => "itemscope", 
           :itemtype  => "http://schema.org/Organization",
           :class     => "org"
         }
-        @organization.name.to_hash.should         == {:itemprop => "name", :class => "organization-name"}
+        
+        @organization.name.to_hash.should        == {:itemprop => "name", :class => "organization-name"}
         @organization.description.to_hash.should  == {:itemprop => "description", :class => "description"}
         @organization.url.to_hash.should          == {:itemprop => "url", :class => "url"}
         @organization.image.to_hash.should        == {:itemprop => "image", :class => "image"}
@@ -32,7 +32,7 @@ describe HTMLSchema do
       
       it "should have attributes" do
         @person.to_hash.should              == {
-          :itemprop  => "person", 
+          #:itemprop  => "person", 
           :itemscope => "itemscope", 
           :itemtype  => "http://schema.org/Person",
           :class     => "vcard"
@@ -50,9 +50,9 @@ describe HTMLSchema do
       
       it "should have attributes" do
         @address.to_hash.should              == {
-          :itemprop  => "address", 
+          #:itemprop  => "address", 
           :itemscope => "itemscope", 
-          :itemtype  => "http://schema.org/Address",
+          :itemtype  => "http://schema.org/PostalAddress",
           :class     => "adr"
         }
         @address.name.to_hash.should         == {:itemprop => "name", :class => "name"}
