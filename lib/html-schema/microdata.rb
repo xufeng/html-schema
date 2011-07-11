@@ -39,7 +39,7 @@ class HTMLSchema
         attribute :tag, :as => :keywords
         attribute :offer, :as => :offers, :type => :offer
         attribute :review, :as => :reviews, :type => :review
-
+        
         # people and organizations
         attribute :editor, :type => :person
         attribute :author, :type => :person
@@ -56,7 +56,7 @@ class HTMLSchema
 
         # dates
         attribute :published_at, :as => :datePublished, :type => :date
-
+        
         type :blog, :as => :Blog
         type :book, :as => :Book
         type :list, :as => :ItemList

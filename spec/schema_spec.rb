@@ -18,7 +18,7 @@ describe HTMLSchema do
           :class     => "org"
         }
         
-        @organization.name.to_hash.should        == {:itemprop => "name", :class => "organization-name"}
+        @organization.name.to_hash.should         == {:itemprop => "name", :class => "organization-name"}
         @organization.description.to_hash.should  == {:itemprop => "description", :class => "description"}
         @organization.url.to_hash.should          == {:itemprop => "url", :class => "url"}
         @organization.image.to_hash.should        == {:itemprop => "image", :class => "image"}
@@ -58,6 +58,26 @@ describe HTMLSchema do
         @address.name.to_hash.should         == {:itemprop => "name", :class => "name"}
         @address.url.to_hash.should          == {:itemprop => "url", :class => "url"}
         @address.image.to_hash.should        == {:itemprop => "image", :class => "image"}
+      end
+    end
+    
+    context ":article" do
+      before do
+        @article = @schema.article
+      end
+      
+      it "should have attributes" do
+        @article.to_hash.should == {
+          :itemscope => "itemscope",
+          :itemtype  => "http://schema.org/Article",
+          :class     => "hentry"
+        }
+        
+        @article.title.to_hash.should         == {:itemprop => "title", :class => "entry-title"}
+        @article.tag.to_hash.should           == {:itemprop => "keywords", :rel => "tag", :class => "tag"}
+        @article.description.to_hash.should   == {:itemprop => "description", :class => "entry-summary"}
+        @article.body.to_hash.should          == {:itemprop => "articleBody", :class => "entry-content"}
+        @article.published_at.to_hash.should  == {:itemprop => "datePublished", :class => "published"}
       end
     end
   end

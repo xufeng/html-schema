@@ -1,6 +1,6 @@
 class HTMLSchema
   class Attribute < HTMLSchema::Object
-    attr_accessor :type, :value
+    attr_accessor :type, :value, :options, :required
     
     def initialize(name, options = {}, &block)
       @_name      = name
@@ -8,6 +8,12 @@ class HTMLSchema
       @parent     = options[:parent]
       @as         = options[:as] || name
       @classes    = Array(as).map(&:to_s)
+      @required   = options[:required] == true
+      
+      @options    = options.except(:as, :parent, :required, :type)
+      @options.each do |key, value|
+        @options[key] = value.to_s
+      end
     end
     
     def inspect

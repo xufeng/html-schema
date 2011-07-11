@@ -33,8 +33,8 @@ class HTMLSchema
         attribute :author, :type => :person, :required => true
         attribute :bookmark
         attribute :tag, :rel => :tag
-
-        type :article, :as => :hnews do
+        
+        type :article do #, :as => :hnews
           attribute :organization, :as => :"source-org", :type => :organization
           attribute :location, :as => :"dateline", :type => :place
           attribute :coordinates, :as => :geo, :type => :coordinates

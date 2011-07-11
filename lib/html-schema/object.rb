@@ -8,7 +8,8 @@ class HTMLSchema
       @attributes = {}
       @types      = {}
       @parent     = options[:parent]
-      @as         = options[:as] || name
+      @as         = options[:as]
+      @as         ||= @parent ? @parent.as : name
       @classes    = Array(as).map(&:to_s)
       
       # inherit parent attributes

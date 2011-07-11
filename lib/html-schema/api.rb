@@ -41,7 +41,8 @@ class HTMLSchema
         attribute :videa, :type => :media
         attribute :encoding, :type => :media
         attribute :audio, :type => :media
-        attribute :published_date, :type => :date
+        attribute :tag
+        attribute :published_at, :type => :date
 
         type :article do
           attribute :body
