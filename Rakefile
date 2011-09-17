@@ -12,7 +12,7 @@ spec = Gem::Specification.new do |s|
   s.email             = "lancejpollard@gmail.com"
   s.rubyforge_project = "html-schema"
   s.platform          = Gem::Platform::RUBY
-  s.files             = %w(Rakefile) + Dir["{lib,rails,spec}/**/*"] - Dir["spec/tmp"]
+  s.files             = %w(Rakefile) + Dir["{lib}/**/*"]
   s.require_path      = "lib"
 end
 
