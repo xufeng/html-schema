@@ -24,7 +24,7 @@ class HTMLSchema
           attribute :country, :as => :addressCountry#, :type => :place, :source => :country
         end
       end
-
+      
       type :composition, :as => :Composition do
         attribute :abstract, :as => :about, :type => :base
         attribute :average_rating, :as => :aggregateRating, :type => :rating
@@ -56,6 +56,7 @@ class HTMLSchema
 
         # dates
         attribute :published_at, :as => :datePublished, :type => :date
+        #attribute :updated_at, :as => :datePublished, :type => :date
         
         type :blog, :as => :Blog
         type :book, :as => :Book

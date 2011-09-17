@@ -78,6 +78,7 @@ describe HTMLSchema do
         @article.description.to_hash.should   == {:itemprop => "description", :class => "entry-summary"}
         @article.body.to_hash.should          == {:itemprop => "articleBody", :class => "entry-content"}
         @article.published_at.to_hash.should  == {:itemprop => "datePublished", :class => "published"}
+        @article.updated_at.to_hash.should    == {:class => "updated"}
         @article.author.to_hash.should        == {:itemprop => "author", :class => "author"}
         @article.url.to_hash.should           == {:itemprop => "url", :class => "url"}
       end

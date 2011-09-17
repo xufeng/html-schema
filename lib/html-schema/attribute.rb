@@ -9,6 +9,7 @@ class HTMLSchema
       @as         = options[:as] || name
       @classes    = Array(as).map(&:to_s)
       @required   = options[:required] == true
+      @type       = options[:type] || :string
       
       @options    = options.except(:as, :parent, :required, :type)
       @options.each do |key, value|
@@ -32,6 +33,14 @@ class HTMLSchema
     
     def value=(value)
       @value = format(value)
+    end
+    
+    def to_hash
+      {}
+    end
+    
+    def to_object
+      to_hash.merge(:type => type)
     end
     
     class << self

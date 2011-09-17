@@ -43,6 +43,7 @@ class HTMLSchema
         attribute :audio, :type => :media
         attribute :tag
         attribute :published_at, :type => :date
+        attribute :updated_at, :type => :date
 
         type :article do
           attribute :body

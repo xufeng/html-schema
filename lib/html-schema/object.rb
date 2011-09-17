@@ -36,6 +36,12 @@ class HTMLSchema
       attributes[key]
     end
     
+    def to_object
+      result = to_hash.merge(:attributes => attributes.keys.inject({}) { |hash, key| hash[key] = attributes[key].to_object ; hash })
+      result[:parent] = parent._name if parent
+      result
+    end
+    
     protected
     def format_class
       @format_class ||= "#{self.class.name.split("::")[0..-2].join("::")}".constantize

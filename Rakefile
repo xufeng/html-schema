@@ -5,7 +5,7 @@ require 'rake/gempackagetask'
 spec = Gem::Specification.new do |s|
   s.name              = "html-schema"
   s.authors           = ["Lance Pollard"]
-  s.version           = "0.2.0"
+  s.version           = "0.5.0"
   s.description       = "Unified Ruby API for HTML5 Microdata and Microformats"
   s.summary           = "Unified Ruby API for HTML5 Microdata and Microformats"
   s.homepage          = "http://github.com/viatropos/html-schema"

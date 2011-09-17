@@ -2,6 +2,19 @@
 
 > For Schema Draft Version 0.9
 
+- http://mbostock.github.com/d3/ex/tree.html
+- http://mbostock.github.com/d3/ex/cluster.html
+- http://bl.ocks.org/1020117
+- http://bl.ocks.org/1166403
+- interactive tree: http://bl.ocks.org/1061834
+- dynamic tree: http://bl.ocks.org/999346
+
+http://code.lancepollard.com/projects/html-schema/microdata
+http://code.lancepollard.com/projects/html-schema/address
+http://code.lancepollard.com/projects/html-schema # schema itself
+http://code.lancepollard.com/projects/guard-javascript-templates
+http://code.lancepollard.com/projects/tagged-with/guard
+
 This is a Ruby interface to the HTML5 microdata schema at [schema.org](http://schema.org), and the HTML microformats at [microformat.org](http://microformat.org).  This doesn't force any markup conventions upon you, it just gives you a hash for common semantic models and attributes.  If you want some semantic markup conventions, use  [storefront](http://github.com/biglobby/storefront).
 
 WORK IN PROGRESS.
@@ -552,6 +565,7 @@ urc
 pavatar
 
 http://microformats.org/wiki/semantic-html
+http://structured-data.org/
 
 ---
 

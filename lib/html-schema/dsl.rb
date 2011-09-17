@@ -19,5 +19,11 @@ class HTMLSchema
     def []=(key, value)
       types[key] = value
     end
+    
+    def to_hash
+      types.keys.inject({}) do |hash, key|
+        hash[key] = types[key].to_hash
+      end
+    end
   end
 end

@@ -60,14 +60,53 @@ class HTMLSchema
     
   end
   
+  def to_hash(options = {})
+    recursively_stringify_keys(api.types.keys.inject({}) do |hash, key|
+      hash[key] = api.types[key].to_object
+      hash
+    end, options)
+  end
+  
+  def to_yaml
+    to_hash.to_yaml
+  end
+  
   protected
   def define_api_method(name)
     self.class.send :define_method, name do
       self.api[name]
     end unless self.respond_to?(name)
   end
+  
+  def compact_keys
+    @compact_keys ||= {
+      :itemtype  => "t",
+      :itemscope => "s",
+      :itemprop  => "p", 
+      :class     => "c",
+      :rel       => "r",
+      :type      => "k"
+    }
+  end
+  
+  private
+  def recursively_stringify_keys(hash = {}, options = {})
+    hash.keys.inject({}) do |result, key|
+      value = hash[key]
+      result[options[:compact] ? (compact_keys[key] || key.to_s) : key.to_s] = case value
+      when ::Hash
+        recursively_stringify_keys(value, options)
+      when ::Array
+        value.map(&:to_s)
+      else
+        value.to_s
+      end
+      result
+    end
+  end
 end
 
+require 'railtie'
 require 'object'
 require 'attribute'
 require 'configuration'
