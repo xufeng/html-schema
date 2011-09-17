@@ -7,6 +7,11 @@ spec = Gem::Specification.new do |s|
   s.authors           = ["Lance Pollard"]
   s.version           = "0.5.0"
   s.summary           = "Schema.org API for Ruby (Microdata and Microformats under one API)"
+  s.description       = %{
+A unified interface to the semantic web.  You tell your ERB/Haml this is a "person" object,
+and it will give you the schema.org microdata, the microformats, or both.  Cuts out having to
+remember these "non-human" keys :).
+}
   s.homepage          = "http://github.com/viatropos/html-schema"
   s.license           = "MIT"
   s.email             = "lancejpollard@gmail.com"
