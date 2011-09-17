@@ -2,22 +2,7 @@
 
 > For Schema Draft Version 0.9
 
-- http://mbostock.github.com/d3/ex/tree.html
-- http://mbostock.github.com/d3/ex/cluster.html
-- http://bl.ocks.org/1020117
-- http://bl.ocks.org/1166403
-- interactive tree: http://bl.ocks.org/1061834
-- dynamic tree: http://bl.ocks.org/999346
-
-http://code.lancepollard.com/projects/html-schema/microdata
-http://code.lancepollard.com/projects/html-schema/address
-http://code.lancepollard.com/projects/html-schema # schema itself
-http://code.lancepollard.com/projects/guard-javascript-templates
-http://code.lancepollard.com/projects/tagged-with/guard
-
-This is a Ruby interface to the HTML5 microdata schema at [schema.org](http://schema.org), and the HTML microformats at [microformat.org](http://microformat.org).  This doesn't force any markup conventions upon you, it just gives you a hash for common semantic models and attributes.  If you want some semantic markup conventions, use  [storefront](http://github.com/biglobby/storefront).
-
-WORK IN PROGRESS.
+This is a Ruby interface to the HTML5 microdata schema at [schema.org](http://schema.org), and the HTML microformats at [microformat.org](http://microformat.org).  This doesn't force any markup conventions upon you, it just gives you a hash for common semantic models and attributes.
 
 ## Overview
 
@@ -25,7 +10,7 @@ This library's only dependency is `active_support`.  It doesn't depend on any pa
 
 Everything is configurable, so you can opt out of the any markup schema.  By default, all microformats are enabled.  [todo]
 
-Checkout the [wiki](http://github.com/biglobby/html-schema/wiki) for all the details.  [todo]
+Checkout the [wiki](http://github.com/viatropos/html-schema/wiki) for all the details.  [todo]
 
 The wiki here will also serve as a community-driven knowledge base of how to apply these schemas to markup "edge cases".  And what you should/shouldn't include to balance SEO with site performance (too many tags and attributes).
 
@@ -569,4 +554,4 @@ http://structured-data.org/
 
 ---
 
-<cite>MIT License.  &copy; 2011 <a href="http://biglobby.com">Big Lobby LLC</a>. All rights reserved.</cite>
+<cite>MIT License.  &copy; 2011 <a href="http://lancepollard.com">Lance Pollard</a>. Free to use for whatever.</cite>
